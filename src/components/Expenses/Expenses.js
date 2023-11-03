@@ -3,13 +3,21 @@ import React, { useEffect, useState } from "react";
 import ExpenseItem from "./ExpenseItem";
 import Card from "../UI/Card";
 import "./Expenses.css";
+import ExpensesFilter from "./ExpensesFilter";
 
 const Expenses = (props) => {
-  const [data, setData] = useState(props.items);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     setData(props.items)
   },[props.items])
+
+  const [filteredYear, setFilteredYear] = useState('2020');
+
+  const filterChangeHandler = selectedYear => {
+    setFilteredYear(selectedYear);
+  };
+
 
   const deleteExpense = (index) => {
     let newData = data.filter((el) => {
@@ -20,6 +28,7 @@ const Expenses = (props) => {
 
   return (
     <Card className="expenses">
+       <ExpensesFilter selected={filteredYear} onChangeFilter={filterChangeHandler} />
       {data.map((item) => {
         return (
           <div key={item.id}>
