@@ -66,8 +66,7 @@ function App() {
   // ];
 
   const addExpenseHandler = (newExpense) => {
-    console.log("In App.js");
-    setExpenses(prevData => [...prevData,newExpense])
+    setExpenses(prevData => [newExpense,...prevData])
   };
   console.log(expenses)
 
