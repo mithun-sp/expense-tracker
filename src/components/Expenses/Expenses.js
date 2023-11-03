@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ExpenseItem from "./ExpenseItem";
 import Card from "../UI/Card";
@@ -6,6 +6,10 @@ import "./Expenses.css";
 
 const Expenses = (props) => {
   const [data, setData] = useState(props.items);
+
+  useEffect(() => {
+    setData(props.items)
+  },[props.items])
 
   const deleteExpense = (index) => {
     let newData = data.filter((el) => {
@@ -18,7 +22,7 @@ const Expenses = (props) => {
     <Card className="expenses">
       {data.map((item) => {
         return (
-          <div>
+          <div key={item.id}>
             <ExpenseItem
               title={item.title}
               amount={item.amount}
