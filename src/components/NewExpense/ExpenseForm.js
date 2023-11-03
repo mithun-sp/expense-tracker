@@ -21,7 +21,12 @@ const ExpenseForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(enteredTitle,enteredAmount,enteredDate)
+    let newObj = {
+      title:enteredTitle,
+      amount:enteredAmount,
+      date:enteredDate
+    }
+    console.log(newObj)
   }
 
 
