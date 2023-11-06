@@ -3,10 +3,15 @@ import React, { useState } from 'react';
 import './ExpenseForm.css';
 
 const ExpenseForm = (props) => {
+  const [isAdding, setIsAdding] = useState(false);
   const [enteredTitle, setEnteredTitle] = useState("")
   const [enteredAmount, setEnteredAmount] = useState("")
   const [enteredLoaction, setEnteredLocation] = useState("")
   const [enteredDate, setEnteredDate] = useState("")
+
+  const handleAddingNewExpense = () => {
+    setIsAdding(true)
+  };
 
   const handleTitleChange = (e) => {
     setEnteredTitle(e.target.value)
@@ -39,11 +44,14 @@ const ExpenseForm = (props) => {
     setEnteredAmount("")
     setEnteredLocation("")
     setEnteredDate("")
+
+    setIsAdding(false)
   }
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
+    {isAdding ? <form onSubmit={handleSubmit}>
       <div className='new-expense__controls'>
         <div className='new-expense__control'>
           <label>Title</label>
@@ -63,10 +71,15 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className='new-expense__actions'>
+        <button onClick={() => setIsAdding(false)}>Cancel</button>
         <button type='submit'>Add Expense</button>
       </div>
-    </form>
+    </form> : <button onClick={handleAddingNewExpense}>Add New Expense</button>}
+  </div>
   );
+
+  
+  
 };
 
 export default ExpenseForm;
